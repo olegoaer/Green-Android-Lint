@@ -1,0 +1,32 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "com.android.tools.lint:lint-api:$lintVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
+    testImplementation "junit:junit:4.12"
+    testImplementation "com.android.tools.lint:lint:$lintVersion"
+    testImplementation "com.android.tools.lint:lint-tests:$lintVersion"
+    testImplementation "com.android.tools:testutils:$lintVersion"
+}
+
+/* La version 1.8 de Java JRE est nécessaire pour le bon fonctionnement de cette règle*/
+/* Java JREn 1.8 is required in order for this rule to work*/
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.example.greenchecks.MyIssueRegistry")
+    }
+}
+
+//je l'éxécute manuellement car bizarrement elle ne se lance pas
+task copyLintJar(type: Copy) {
+    description = 'Copy the lint jar file into the ~/.android/lint folder.'
+    from('build/libs/')
+    into(System.getProperty("user.home") + '/.android/lint')
+    include("*.jar")
+}
+
+build.finalizedBy(copyLintJar)
