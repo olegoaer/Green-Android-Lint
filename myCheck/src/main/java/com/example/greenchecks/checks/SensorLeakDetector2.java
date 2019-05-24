@@ -1,4 +1,4 @@
-package com.example.greenchecks;
+package com.example.greenchecks.checks;
 
 import com.android.annotations.NonNull;
 import com.android.tools.lint.client.api.JavaEvaluator;
@@ -9,6 +9,7 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
+import com.example.greenchecks.MyIssueRegistry;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.annotations.NotNull;
@@ -51,6 +52,13 @@ public class SensorLeakDetector2 extends Detector implements Detector.UastScanne
     private static final String REGISTER_METHOD_NAME = "registerListener";
     private static final String UNREGISTER_METHOD_NAME = "unregisterListener";
     private static final String SENSORMANAGER_CLASS_NAME = "android.hardware.SensorManager";
+
+    private ArrayList<String> mSensorListenerRegistered;
+    private ArrayList<String> mSensorListenerUnregistered;
+
+
+
+
 
     /** List {@code registerListener()} calls have been encountered */
     private ArrayList<UCallExpression> registrationCalls;

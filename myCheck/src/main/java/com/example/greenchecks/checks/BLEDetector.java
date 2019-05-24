@@ -1,4 +1,4 @@
-package com.example.greenchecks;
+package com.example.greenchecks.checks;
 
 import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Detector;
@@ -9,6 +9,7 @@ import com.android.tools.lint.detector.api.Location;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
 import com.android.tools.lint.detector.api.SourceCodeScanner;
+import com.example.greenchecks.MyIssueRegistry;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.uast.UElement;
@@ -21,18 +22,16 @@ import java.util.List;
 
 public class BLEDetector extends Detector implements SourceCodeScanner {
 
-    private static final String ERROR_MESSAGE = "Using BLE API is user-friendly";
+    private static final String ERROR_MESSAGE = "You are using Bluetooh. Did you take a look at the Bluetooth Low Energy API?";
     private static final String IMPORT_STR_CLASSIC_B = "android.bluetooth";
     private static final String IMPORT_STR_BLE = "android.bluetooth.le";
 
-    private boolean mHasBluetoothImport = false;
-    private boolean mHasBLEImport = false;
-    private Location mLastLocationBluetoothImport;
 
     public static final Issue ISSUE = Issue.create(
             "BluetoothLowEnergy",
             "Use the Low Energy Bluetooth API",
-            "In contrast to Classic Bluetooth, Bluetooth Low Energy (BLE) is designed to provide significantly lower power consumption",
+            "In contrast to Classic Bluetooth, Bluetooth Low Energy (BLE) is designed"
+                        + "to provide significantly lower power consumption",
 
             MyIssueRegistry.GREENNESS,
             6,
@@ -57,10 +56,12 @@ public class BLEDetector extends Detector implements SourceCodeScanner {
             @Override
             public void visitFile(@NotNull UFile node) {
 
+                boolean mHasBluetoothImport = false;
+                boolean mHasBLEImport = false;
+
                  for(UImportStatement i : node.getImports()){
                      if(i.toString().contains(IMPORT_STR_CLASSIC_B)){
                          mHasBluetoothImport = true;
-                         mLastLocationBluetoothImport = context.getLocation(i);
                      }
                      if(i.toString().contains(IMPORT_STR_BLE)){
                          mHasBLEImport = true;
@@ -68,7 +69,7 @@ public class BLEDetector extends Detector implements SourceCodeScanner {
                 }
 
                 if(mHasBluetoothImport && !mHasBLEImport){
-                    context.report(ISSUE, node, mLastLocationBluetoothImport, ERROR_MESSAGE);
+                    context.report(ISSUE, Location.create(context.file), ERROR_MESSAGE);
                 }
             }
         };

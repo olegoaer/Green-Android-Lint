@@ -1,4 +1,4 @@
-package com.example.greenchecks;
+package com.example.greenchecks.checks;
 
 import com.android.tools.lint.client.api.JavaEvaluator;
 import com.android.tools.lint.detector.api.ConstantEvaluator;
@@ -10,6 +10,7 @@ import com.android.tools.lint.detector.api.LintFix;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
 import com.android.tools.lint.detector.api.SourceCodeScanner;
+import com.example.greenchecks.MyIssueRegistry;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.annotations.NotNull;

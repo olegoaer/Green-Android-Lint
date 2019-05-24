@@ -1,4 +1,4 @@
-package com.example.greenchecks;
+package com.example.greenchecks.checks;
 
 import com.android.tools.lint.client.api.JavaEvaluator;
 import com.android.tools.lint.detector.api.Detector;
@@ -8,6 +8,8 @@ import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
+import com.android.tools.lint.detector.api.SourceCodeScanner;
+import com.example.greenchecks.MyIssueRegistry;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +22,7 @@ import java.lang.String;
 import java.util.Collections;
 import java.util.List;
 
-public class IITLDetector extends Detector implements UastScanner {
+public class IITLDetector extends Detector implements SourceCodeScanner {
     //Issue décrivant le problème et pointant vers l'implementation du détecteur
 
     private final String HTTPURLCONN_CLS = "java.net.URL";
@@ -31,7 +33,7 @@ public class IITLDetector extends Detector implements UastScanner {
 
         //Titre -- montré dans le dialogue de préférences de l'IDE, comme en-tête de catégorie
         // dans la fenêtre de résultats de l'analyse, etc
-        "Making http call in a loop statement is energy greedy",
+        "Making http call in a loop statement is the root of all evil",
 
         //Description complète de l'issue
         "TODO",

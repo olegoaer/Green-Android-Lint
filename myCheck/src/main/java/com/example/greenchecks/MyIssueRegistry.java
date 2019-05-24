@@ -2,6 +2,19 @@ package com.example.greenchecks;
 import com.android.tools.lint.client.api.IssueRegistry;
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Issue;
+import com.example.greenchecks.checks.BLEDetector;
+import com.example.greenchecks.checks.BatteryEfficientLocation;
+import com.example.greenchecks.checks.DarkUIDetector;
+import com.example.greenchecks.checks.DirtyBootDetector;
+import com.example.greenchecks.checks.DurableWakeLockDetector;
+import com.example.greenchecks.checks.EverlastingServiceDetector;
+import com.example.greenchecks.checks.IITLDetector;
+import com.example.greenchecks.checks.KeepCPUOn;
+import com.example.greenchecks.checks.KeepScreenOn;
+import com.example.greenchecks.checks.RigidAlarmDetector;
+import com.example.greenchecks.checks.SensorCoalesceDetector;
+import com.example.greenchecks.checks.SensorLeakDetector2;
+import com.example.greenchecks.checks.UncompressedDataTransmissionDetector;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,9 +29,9 @@ public class MyIssueRegistry extends IssueRegistry {
     private static final List<Issue> sIssues;
 
     static {
-        List<Issue> issues = new ArrayList<Issue>(12);
+        List<Issue> issues = new ArrayList<Issue>(13);
 
-        issues.add(BatteryEfficientLocationDetector.ISSUE);
+        issues.add(BatteryEfficientLocation.ISSUE_FUSED_API);
         issues.add(BLEDetector.ISSUE);
         issues.add(DarkUIDetector.ISSUE);
         issues.add(DirtyBootDetector.ISSUE);
@@ -30,6 +43,7 @@ public class MyIssueRegistry extends IssueRegistry {
         issues.add(RigidAlarmDetector.ISSUE);
         issues.add(SensorCoalesceDetector.ISSUE);
         issues.add(SensorLeakDetector2.ISSUE);
+        issues.add(UncompressedDataTransmissionDetector.ISSUE);
 
         sIssues = Collections.unmodifiableList(issues);
     }

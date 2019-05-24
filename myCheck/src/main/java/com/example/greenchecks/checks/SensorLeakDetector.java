@@ -1,4 +1,4 @@
-package com.example.greenchecks;
+package com.example.greenchecks.checks;
 
 import com.android.tools.lint.client.api.JavaEvaluator;
 import com.android.tools.lint.detector.api.Context;
@@ -9,6 +9,7 @@ import com.android.tools.lint.detector.api.JavaContext;
 import com.android.tools.lint.detector.api.Location;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
+import com.example.greenchecks.MyIssueRegistry;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.annotations.Nullable;
@@ -22,17 +23,13 @@ import java.util.List;
 public class SensorLeakDetector extends Detector implements Detector.UastScanner {
 
 
-    public static final Issue ISSUE = Issue.create(
-            // ID: utilisé dans les avertissements "warning" @SuppressLint etc
+    public static final Issue REGULAR_SENSOR_LEAK = Issue.create(
             "SensorLeak",
-
-            //Titre -- montré dans le dialogue de préférences de l'IDE, comme en-tête de catégorie
-            // dans la fenêtre de résultats de l'analyse, etc
             "You did not unregister a sensor properly",
-
-            //Description complète de l'issue
-            "Always make sure to disable sensors you don't need, especially when your activity is paused. Failing to do so can drain the battery in just a few hours. Note that the system will not disable sensors automatically when the screen turns off",
-
+            "Always make sure to disable sensors you don't need, especially " +
+                    "when your activity is paused. Failing to do so can drain the battery " +
+                    "in just a few hours. Note that the system will not disable sensors " +
+                    "automatically when the screen turns off",
             MyIssueRegistry.GREENNESS,
             6,
             Severity.ERROR,
@@ -44,6 +41,32 @@ public class SensorLeakDetector extends Detector implements Detector.UastScanner
             .addMoreInfo("https://developer.android.com/reference/android/hardware/SensorManager")
             .setAndroidSpecific(true);
 
+
+    public static final Issue CAMERA_LEAK = Issue.create(
+            "CameraLeak",
+            "You did not release a camera properly",
+            "TODO",
+            MyIssueRegistry.GREENNESS,
+            6,
+            Severity.ERROR,
+            new Implementation(
+                    SensorLeakDetector.class,
+                    Scope.JAVA_FILE_SCOPE
+            )
+    ).setAndroidSpecific(true);
+
+    public static final Issue GPS_LEAK = Issue.create(
+            "GPSLeak",
+            "You did not remove your location update properly",
+            "TODO",
+            MyIssueRegistry.GREENNESS,
+            6,
+            Severity.ERROR,
+            new Implementation(
+                    SensorLeakDetector.class,
+                    Scope.JAVA_FILE_SCOPE
+            )
+    ).setAndroidSpecific(true);
 
 
     private UElement registrationCallNode = null;
@@ -93,7 +116,7 @@ public class SensorLeakDetector extends Detector implements Detector.UastScanner
     public void afterCheckFile(Context context) {
 
         if (hasForgottenUnregister()) {
-            jctx.report(ISSUE, registrationCallNode, registrationCallLocation, "The unregistration of this sensor is missing");
+            jctx.report(REGULAR_SENSOR_LEAK, registrationCallNode, registrationCallLocation, "The unregistration of this sensor is missing");
         }
 
         super.afterCheckFile(context);

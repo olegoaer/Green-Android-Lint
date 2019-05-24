@@ -1,21 +1,21 @@
-package com.example.greenchecks;
+package com.example.greenchecks.checks;
 
-import com.android.tools.lint.checks.ControlFlowGraph;
 import com.android.tools.lint.client.api.JavaEvaluator;
 import com.android.tools.lint.detector.api.Context;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
 import com.android.tools.lint.detector.api.JavaContext;
+import com.android.tools.lint.detector.api.Location;
 import com.android.tools.lint.detector.api.Scope;
 import com.android.tools.lint.detector.api.Severity;
 import com.android.tools.lint.detector.api.SourceCodeScanner;
+import com.example.greenchecks.MyIssueRegistry;
 import com.intellij.psi.PsiMethod;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UCallExpression;
-import org.jetbrains.uast.UElement;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,9 +49,15 @@ public class EverlastingServiceDetector extends Detector implements SourceCodeSc
 
 
 
-    private boolean mStartServiceFound = false;
-    private boolean mStopServiceFound = false;
+    private boolean mStartServiceFound;
+    private boolean mStopServiceFound;
+    private Location mStartServiceLocation;
 
+    @Override
+    public void beforeCheckProject(@NotNull Context context) {
+        mStartServiceFound = false;
+        mStopServiceFound = false;
+    }
 
     @Nullable
     @Override
@@ -64,7 +70,6 @@ public class EverlastingServiceDetector extends Detector implements SourceCodeSc
     public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
 
         JavaEvaluator eval = context.getEvaluator();
-        UCallExpression startCall = null;
 
         if (!(eval.isMemberInSubClassOf(method, CLASS_CONTEXT, true)
                 || !eval.isMemberInSubClassOf(method, CLASS_SERVICE, true))) return;
@@ -75,37 +80,23 @@ public class EverlastingServiceDetector extends Detector implements SourceCodeSc
 
             case "startService":
                 mStartServiceFound = true;
-                startCall = node;
+                mStartServiceLocation = context.getLocation(node);
                 break;
             case "stopService": case "stopSelf": case "stopSelfResult":
                 mStopServiceFound = true;
                 break;
         }
 
-
-       if (mStartServiceFound && !mStopServiceFound) {
-
-            context.report(ISSUE, startCall,
-                    context.getCallLocation(startCall, true, true),
-                    "This service may run endlessly");
-
-       }
-
-
-
     }
 
-
-
-/*
     @Override
     public void afterCheckProject(Context context) {
 
-        if (startServiceCallNode!=null && stopServiceCallNode==null) jctx.report(ISSUE, startServiceCallNode, jctx.getNameLocation(startServiceCallNode),
-                "The explicit stop of this service seems missing");
+        if (mStartServiceFound && !mStopServiceFound) {
 
-        super.afterCheckFile(context);
+            context.report(ISSUE,mStartServiceLocation,"This service is never stopped");
+
+        }
     }
-*/
 
 }
