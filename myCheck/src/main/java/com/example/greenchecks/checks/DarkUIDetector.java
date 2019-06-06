@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 
 import javax.imageio.ImageIO;
 
@@ -46,7 +47,7 @@ public class DarkUIDetector extends Detector implements XmlScanner, BinaryResour
             Severity.WARNING,
             new Implementation(
                     DarkUIDetector.class,
-                    Scope.RESOURCE_FILE_SCOPE
+                    EnumSet.of(Scope.RESOURCE_FILE, Scope.BINARY_RESOURCE_FILE)
             )
 
 
@@ -77,6 +78,7 @@ public class DarkUIDetector extends Detector implements XmlScanner, BinaryResour
     @Override
     public boolean appliesTo(@NotNull ResourceFolderType folderType) {
         return ResourceFolderType.DRAWABLE==folderType || ResourceFolderType.MIPMAP==folderType;
+        //et values ??
     }
 
     @Override
