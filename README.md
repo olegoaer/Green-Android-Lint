@@ -1,4 +1,4 @@
-This is an extension for Android Studio I wrote in 2019, for enforcing green coding practices. It implements 12 detection rules, based on an evolving [catalog of android-specific energy code smells](https://olegoaer.perso.univ-pau.fr/android-energy-smells/).
+This is an extension for Android Studio I wrote in 2019, for enforcing green coding practices. It implements 12 detection rules and some quick fix thereof, based on an evolving [catalog of android-specific energy code smells](https://olegoaer.perso.univ-pau.fr/android-energy-smells/).
 
 The successor of this prototype is now [ecoCode Mobile](https://github.com/cnumr/ecoCode/tree/main/src/android-plugin), based on SonarQube.
 
@@ -12,6 +12,8 @@ The successor of this prototype is now [ecoCode Mobile](https://github.com/cnumr
 * Select `Analyse>Inspect code` from the top menu
 * Select your app Module only
 * Focus on the new *Greenness* category reporting
+
+![alt text](./assets/screenshot.png)
 
 # 🫵 Contribute
 
