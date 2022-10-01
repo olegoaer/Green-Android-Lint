@@ -7,7 +7,7 @@ This proof of concept has evolved into [ecoCode Mobile](https://github.com/cnumr
 * Move the file into your `~/.android/lint` directory. Create it if needed
 * Restart Android Studio
 
-# 🚀 Getting Started
+# 🔍 Inspections
 * Open any Android project
 * Select `Analyse>Inspect code` from the top menu
 * Select your app Module only
