@@ -15,7 +15,7 @@ This proof of concept has evolved into [ecoCode Mobile](https://github.com/cnumr
 
 ![alt text](./assets/screenshot.png)
 
-# 🫵 Contribute
+# 🫵 Fork It!
 
 In 2019 I waded in the undocumented waters of the Android Lint API but since 2021, there exist a documentation: http://googlesamples.github.io/android-custom-lint-rules/api-guide.html
 
