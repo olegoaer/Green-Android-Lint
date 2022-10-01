@@ -1,6 +1,6 @@
-This is an extension for Android Studio I wrote in 2019, for enforcing green coding practices. It implements 12 checks and some quick fix thereof, based on an evolving [catalog of android-specific energy code smells](https://olegoaer.perso.univ-pau.fr/android-energy-smells/).
+This is an extension for Android Studio I wrote in 2019, for enforcing green coding practices. It implements 12 checks and some quick fix thereof, based on an evolving [catalog of android-specific energy code smells](https://olegoaer.perso.univ-pau.fr/android-energy-smells/) (expressed in Java but works for Kotlin).
 
-This proof of concept has been replaced by [ecoCode Mobile](https://github.com/cnumr/ecoCode/tree/main/src/android-plugin), based on SonarQube. Feel free to take a look at this new exciting project.
+This proof of concept has evolved into [ecoCode Mobile](https://github.com/cnumr/ecoCode/tree/main/src/android-plugin), based on SonarQube. Feel free to take a look at this new exciting project.
 
 # 💾 Installation
 * Download [greenchecks.jar](./assets/greenchecks.jar) (tested for Android Lint version 26.3.2)
