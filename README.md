@@ -1,40 +1,38 @@
-# CustomLintRule
-This custom Lint rule allow for the detection of class declaration in the code source, which the name is 3 or less character short.
+This is an extension for Android Studio I wrote in 2019, for enforcing green coding practices. It implements 12 detection rules, based on an evolving [catalog of android-specific energy code smells](https://olegoaer.perso.univ-pau.fr/android-energy-smells/).
 
-## Version
-This rule works with the current version of Android studio (05/14/2018)
-Android Studio 3.1
-Android Lint 26.1.2
-Java JRE 1.8
+The successor of this prototype is now [ecoCode Mobile](https://github.com/cnumr/ecoCode/tree/main/src/android-plugin), based on SonarQube.
 
-## How to use
-In order to make this rule work, you'll need to compile it with Android Studio's gradle tool, and put the resulting .jar (found at CustomLintRule/myCheck/build/libs/myCheck.jar) into the custom lint rule folder, located by default at ~/.android/lint/ on Unix, and at the %userprofile% directory on Windows.
+# 💾 Installation
+* Download [greenchecks.jar]() (tested for Android Lint version 26.3.2)
+* Move the file into your `~/.android/lint` directory. Create it if needed
+* Restart Android Studio
 
-## For more info
+# 🚀 Getting Started
+* Open any Android project
+* Select `Analyse>Inspect code` from the top menu
+* Select your app Module only
+* Focus on the new *Greenness* category reporting
+
+# 🫵 Contribute
+
+In 2019 I waded in the undocumented waters of the Android Lint API but since 2021, there exist a documentation: http://googlesamples.github.io/android-custom-lint-rules/api-guide.html
+
 For more information about recent changes in Android Lint and how to write custom Lint rules, please see the following links:
-* Google group lint-dev: https://groups.google.com/forum/#!forum/lint-dev
+* Google group lint-dev: https://groups.google.com/g/lint-dev
 * KotlinConf on youtube: https://youtu.be/p8yX5-lPS6o
 
-# Règle Lint Personnalisée
-Cette règle Lint personnalisée permet la détection de nom de classes dans le code source, dont le nom fait trois caractères ou moins.
-
-## Version
-Cette règle fonctionne sur la version actuelle d'Android Studio (05/14/2018)
-Android Studio 3.1
-Android Lint 26.1.2
-Java JRE 1.8
-
-## Comment l'utiliser
-Pour utilisercette règle, vous devez d'abord la compiler à l'aide de gradle, l'outil de compilation d'Android Studio.
-* Une fois dans Android Studio, dans le terminal, entrez les deux commandes suivantes
-  * gradlew clean
-  * gradlew assemble
-* Ensuite rendez vous dans le répertoire CustomLintRule/myCheck/build/libs/myCheck.jar
-* déplacer le .jar dans the dossier des règles lint personnalisées, situé pardéfaut à
-   * ~/.android/lint/ sous Unix
-   * %userprofile% (commande **Run** sous Windows.
-
-## Pour plus d'informations
-Pour plus d'informations concernant les récentes mises à jour et sur comment écrire une règle lint personnalisée, je vous conseille les liens suivants:
-* Google group lint-dev: https://groups.google.com/forum/#!forum/lint-dev
-* KotlinConf on youtube: https://youtu.be/p8yX5-lPS6o
+# 🔗 How to cite this work?
+```
+@inproceedings{legoaer:hal-03252141,
+  TITLE = {{Enforcing Green Code with Android Lint}},
+  AUTHOR = {Le Goaer, Olivier},
+  BOOKTITLE = {{ASEW '20: 35th IEEE/ACM International Conference on Automated Software Engineering Workshops}},
+  ADDRESS = {Melbourne, Australia},
+  PUBLISHER = {{ACM}},
+  PAGES = {85-90},
+  YEAR = {2021},
+  MONTH = Sep,
+  DOI = {10.1145/3417113.3422188},
+  KEYWORDS = {green ; battery ; energy ; bugs ; lint ; smells ; Android},
+}
+```
