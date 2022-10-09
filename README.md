@@ -24,7 +24,7 @@ For more information about recent changes in Android Lint and how to write custo
 * KotlinConf on youtube: https://youtu.be/p8yX5-lPS6o
 
 # 🔗 How to cite this work?
-```
+```bibtex
 @inproceedings{legoaer:hal-03252141,
   TITLE = {{Enforcing Green Code with Android Lint}},
   AUTHOR = {Le Goaer, Olivier},
